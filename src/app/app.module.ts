@@ -8,13 +8,18 @@ import { HomeComponent } from './pages/home/home.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CardGifComponent } from './components/card-gif/card-gif.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HistoryComponent } from './pages/history/history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SampleComponentComponent,
-    HomeComponent
+    HomeComponent,
+    CardGifComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatAutocompleteModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    FormsModule,
+    MatInputModule,
+    HttpClientModule
   ],
   exports: [
     MatAutocompleteModule,

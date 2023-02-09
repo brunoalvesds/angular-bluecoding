@@ -1,20 +1,18 @@
-<div class="container">
-  <h2>Home Page sample</h2>
-  <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Number</mat-label>
-      <input type="text"
-             placeholder="Pick one"
-             aria-label="Number"
-             matInput
-             [formControl]="myControl"
-             [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
-  
+<form class="container" #f="ngForm">
+  <input type="text"
+  placeholder="Search GIF"
+  name="keyword"
+  ngModel>
+</form>
+
+<div id="search-results" class="card-list" *ngIf="searching">
+  <ng-container *ngFor="let item of searchList">
+    <app-card-gif *ngIf="item.images.fixed_height_downsampled.url" class="card-item" [gifName]="item.title" [imageUrl]="item.images.fixed_height_downsampled.url"></app-card-gif>
+  </ng-container>
+</div>
+
+<div id="trending" class="card-list" *ngIf="!searching">
+  <ng-container *ngFor="let item of trendingList">
+    <app-card-gif *ngIf="item.images.fixed_height_downsampled.url" class="card-item" [gifName]="item.title" [imageUrl]="item.images.fixed_height_downsampled.url"></app-card-gif>
+  </ng-container>
 </div>

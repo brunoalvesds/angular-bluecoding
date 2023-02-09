@@ -1,0 +1,23 @@
+<div class="card-content" (click)="openModal = true">
+  <div class="picture">
+    <img src="{{imageUrl}}">
+  </div>
+  <div class="title">
+    <p>{{gifName}}</p>
+  </div>
+</div>
+
+<div class="zoom-content" *ngIf="openModal">
+  <div class="mask">
+    <div class="top-area">
+      <div class="close-button">
+        <button (click)="openModal = false">X</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="picture">
+        <img src="{{imageUrl}}" alt="{{gifName}}">
+      </div>
+    </div>
+  </div>
+</div>

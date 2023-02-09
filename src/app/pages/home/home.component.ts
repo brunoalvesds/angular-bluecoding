@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { SearchGifService } from 'src/app/services/search-gif/search-gif.service';
 
 @Component({
   selector: 'app-home',
@@ -10,19 +11,25 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class HomeComponent {
   myControl = new FormControl('');
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
+  trendingList: Array<any>;
+  searchList: Array<any>;
+  searching: boolean = false;
+
+  constructor(private _searchGifService: SearchGifService) {}
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-    );
+   this.getTrendingGifs();
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  getTrendingGifs() {
+    this._searchGifService.trendingGifs().subscribe(
+      response => {
+        console.log("API Response: ", response);
+        this.trendingList = response['data'];
+      },
+      error => {
+        console.log("API Response Error: ", error);
+      }
+    );
   }
 }
