@@ -2,6 +2,7 @@
   <input type="text"
   placeholder="Search GIF"
   name="keyword"
+  (keyup.enter)="searchGifs(f.value)"
   ngModel>
 </form>
 

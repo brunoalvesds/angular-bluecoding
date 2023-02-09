@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { SearchGifService } from 'src/app/services/search-gif/search-gif.service';
 
 @Component({
@@ -29,6 +27,24 @@ export class HomeComponent {
       },
       error => {
         console.log("API Response Error: ", error);
+      }
+    );
+  }
+
+  searchGifs(formData) {
+    if (formData.keyword == "" || formData.keyword == null || formData.keyword == undefined) {
+      this.searching = false;
+    } else {
+      this.searching = true;
+    }
+    
+    this._searchGifService.searchGif(formData.keyword).subscribe(
+      response => {
+        console.log("Response search: ", response);
+        this.searchList = response['data'];
+      },
+      error => {
+        console.log("Response search error: ", error);
       }
     );
   }
